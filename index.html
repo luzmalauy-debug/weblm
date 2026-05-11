@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COGNVS — We Engineer the Mind</title>
-  <meta name="description" content="A creative studio at the intersection of design, technology, and human cognition.">
+  <title>COGNVS — Agencia de Marketing Digital</title>
+  <meta name="description" content="Estrategia, contenido y performance para marcas que quieren liderar su industria digital.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,154 +12,208 @@
 </head>
 <body>
 
-  <!-- ── Navbar ── -->
-  <nav class="navbar">
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <span class="loader-logo">COGNVS</span>
+    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+    <span class="loader-pct" id="loaderPct">0%</span>
+  </div>
+
+  <!-- Video canvas (fixed behind everything) -->
+  <canvas id="videoCanvas"></canvas>
+  <div class="bg-overlay"></div>
+
+  <!-- Gold progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
     <span class="nav-logo">COGNVS</span>
     <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#studio">Studio</a></li>
-      <li><a href="#journal">Journal</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#casos">Casos de Éxito</a></li>
+      <li><a href="#agencia">Agencia</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Get Started</a>
+    <a href="#contacto" class="nav-cta">Empezar ahora</a>
   </nav>
 
-  <!-- ── Hero ── -->
-  <section class="hero" id="hero">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="media/todo.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay"></div>
-    <div class="hero-content animate-in">
-      <div class="badge">REDEFINING INTELLIGENCE</div>
-      <h1 class="hero-headline">We Engineer<br>the Mind</h1>
-      <p class="hero-sub">A creative studio at the intersection of design,<br>technology, and human cognition.</p>
-      <div class="hero-ctas">
-        <a href="#work" class="btn btn-gold">Explore Our Work</a>
-        <a href="#hero" class="btn btn-ghost">Watch Showreel&nbsp;→</a>
+  <!-- Fixed scenes: content changes as video scrolls -->
+  <div class="scenes-wrap">
+
+    <!-- Scene 1: Hero intro -->
+    <div class="scene active" id="scene1">
+      <div class="scene-inner">
+        <div class="badge">MARKETING DIGITAL</div>
+        <h1>Hacemos crecer<br>tu marca</h1>
+        <p>Estrategia, contenido y performance para marcas que quieren liderar su industria digital.</p>
+        <div class="scene-ctas">
+          <a href="#contacto" class="btn btn-gold">Ver resultados</a>
+          <a href="#servicios" class="btn btn-ghost">Nuestros servicios&nbsp;→</a>
+        </div>
+        <div class="scroll-hint" id="scrollHint">
+          <span>SCROLL</span>
+          <div class="scroll-arrow"></div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- ── Manifesto ── -->
-  <section class="manifesto">
-    <div class="manifesto-content animate-in">
-      <div class="gold-line"></div>
-      <blockquote>Some minds see what others miss.<br>We engineer the difference.</blockquote>
-      <p class="manifesto-sub">Since 2012, we have turned complex ideas into defining experiences.</p>
+    <!-- Scene 2: Paid Media -->
+    <div class="scene" id="scene2">
+      <div class="scene-inner">
+        <span class="overline">01 — PAID MEDIA</span>
+        <h2>Inversión que<br>genera retorno real</h2>
+        <p>Campañas de performance en Google, Meta y TikTok optimizadas para maximizar tu ROI desde el día uno.</p>
+        <div class="scene-metric">
+          <span class="metric-num">4.2×</span>
+          <span class="metric-label">ROI PROMEDIO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3: Content Strategy -->
+    <div class="scene" id="scene3">
+      <div class="scene-inner">
+        <span class="overline">02 — CONTENT STRATEGY</span>
+        <h2>Contenido que<br>conecta y convierte</h2>
+        <p>Creamos narrativas de marca que capturan atención y transforman audiencias en clientes leales.</p>
+        <div class="scene-metric">
+          <span class="metric-num">280%</span>
+          <span class="metric-label">CRECIMIENTO ORGÁNICO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 4: SEO & Analytics -->
+    <div class="scene" id="scene4">
+      <div class="scene-inner">
+        <span class="overline">03 — SEO & ANALYTICS</span>
+        <h2>Datos que<br>impulsan decisiones</h2>
+        <p>Visibilidad orgánica y análisis profundo para que cada decisión esté respaldada por evidencia real.</p>
+        <div class="scene-metric">
+          <span class="metric-num">#1</span>
+          <span class="metric-label">EN BÚSQUEDAS ORGÁNICAS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 5: Closing CTA -->
+    <div class="scene" id="scene5">
+      <div class="scene-inner">
+        <span class="overline">¿LISTO PARA CRECER?</span>
+        <h2>Empecemos a<br>trabajar juntos</h2>
+        <p>Agenda una sesión estratégica gratuita y descubre cómo podemos escalar tu marca.</p>
+        <a href="#contacto" class="btn btn-gold btn-lg">Agendar llamada gratuita</a>
+      </div>
+    </div>
+
+    <!-- Scene progress dots -->
+    <div class="scene-dots">
+      <div class="scene-dot active"></div>
+      <div class="scene-dot"></div>
+      <div class="scene-dot"></div>
+      <div class="scene-dot"></div>
+      <div class="scene-dot"></div>
+    </div>
+
+  </div>
+
+  <!-- Scroll spacer: 600vh = 5 viewport heights of video playthrough -->
+  <div class="page-spacer"></div>
+
+  <!-- Stats -->
+  <section class="stats" id="servicios">
+    <div class="stat">
+      <span class="stat-num">250<sup>+</sup></span>
+      <span class="stat-label">Marcas Escaladas</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat">
+      <span class="stat-num gold">4.2×</span>
+      <span class="stat-label">ROI Promedio</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat">
+      <span class="stat-num">8</span>
+      <span class="stat-label">Años de Experiencia</span>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat">
+      <span class="stat-num">94<sup>%</sup></span>
+      <span class="stat-label">Retención de Clientes</span>
     </div>
   </section>
 
-  <!-- ── Ideas ── -->
-  <section class="ideas" id="process">
-    <div class="ideas-bg"></div>
-    <div class="ideas-overlay"></div>
-    <div class="ideas-content animate-in">
-      <span class="overline">OUR PHILOSOPHY</span>
-      <h2>Ideas Are Alive.<br>Let Them Breathe.</h2>
-      <p>We believe in the organic process of creation — where thoughts are nurtured, challenged, and finally set free to transform the world around them.</p>
-      <ul class="bullet-list">
-        <li>Human-centered strategy</li>
-        <li>Systems thinking at every scale</li>
-        <li>Craft that endures beyond trend</li>
-      </ul>
+  <!-- Services detail -->
+  <section class="services-detail" id="casos">
+    <div class="services-detail-header">
+      <span class="overline">NUESTROS SERVICIOS</span>
+      <h2>Todo lo que<br>tu marca necesita</h2>
     </div>
-  </section>
-
-  <!-- ── Services ── -->
-  <section class="services" id="work">
-    <div class="services-header">
-      <h2>What We Create</h2>
-      <p class="services-sub">Three disciplines.<br>One unified vision.</p>
-    </div>
-    <div class="services-divider"></div>
-    <div class="services-grid">
-      <div class="service-card animate-in">
+    <div class="services-detail-grid">
+      <div class="service-item">
         <span class="service-num">01</span>
-        <h3>Brand<br>Strategy</h3>
-        <p>We define how brands think, speak, and stand apart in saturated markets — building identities that endure.</p>
+        <h3>Paid Media &<br>Performance</h3>
+        <p>Google Ads, Meta Ads, TikTok Ads. Campañas optimizadas para conversión y ROAS positivo desde la primera semana.</p>
       </div>
-      <div class="service-divider"></div>
-      <div class="service-card animate-in" style="transition-delay: 0.15s">
+      <div class="service-sep"></div>
+      <div class="service-item">
         <span class="service-num">02</span>
-        <h3>Digital<br>Experience</h3>
-        <p>Interfaces and interactions that feel inevitable — where friction disappears and every click becomes intuitive.</p>
+        <h3>Content &<br>Social Media</h3>
+        <p>Estrategia editorial, producción de contenido y gestión de comunidades que construyen marca y generan demanda.</p>
       </div>
-      <div class="service-divider"></div>
-      <div class="service-card animate-in" style="transition-delay: 0.3s">
+      <div class="service-sep"></div>
+      <div class="service-item">
         <span class="service-num">03</span>
-        <h3>Creative<br>Direction</h3>
-        <p>The invisible thread that makes a campaign cohesive, a product gallery beautiful, and a brand unmistakable.</p>
+        <h3>SEO &<br>Analytics</h3>
+        <p>Posicionamiento orgánico, auditorías técnicas y dashboards personalizados para tomar decisiones con datos reales.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── Stats ── -->
-  <section class="stats">
-    <div class="stat animate-in">
-      <span class="stat-num">200+</span>
-      <span class="stat-label">Projects Delivered</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat animate-in" style="transition-delay: 0.1s">
-      <span class="stat-num">12</span>
-      <span class="stat-label">Years of Craft</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat animate-in" style="transition-delay: 0.2s">
-      <span class="stat-num gold">48</span>
-      <span class="stat-label">Industry Awards</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat animate-in" style="transition-delay: 0.3s">
-      <span class="stat-num">94%</span>
-      <span class="stat-label">Client Retention</span>
+  <!-- CTA section -->
+  <section class="cta-section" id="contacto">
+    <div class="cta-inner">
+      <div class="gold-line"></div>
+      <h2>Tu próximo cliente<br>ya está buscándote</h2>
+      <p>Agenda una sesión estratégica gratuita. Sin compromisos — solo resultados.</p>
+      <div class="cta-row">
+        <a href="mailto:hola@cognvs.com" class="btn btn-gold btn-lg">Agendar sesión gratuita</a>
+        <span class="cta-email">hola@cognvs.com</span>
+      </div>
     </div>
   </section>
 
-  <!-- ── Final CTA ── -->
-  <section class="cta-section" id="contact">
-    <div class="cta-bg"></div>
-    <div class="cta-overlay"></div>
-    <div class="cta-content animate-in">
-      <div class="badge">BEGIN YOUR JOURNEY</div>
-      <h2>Your Vision.<br>Engineered.</h2>
-      <p>Let's build something that outlasts the moment.</p>
-      <a href="mailto:hello@cognvs.com" class="btn btn-gold btn-lg">Start a Project</a>
-    </div>
-  </section>
-
-  <!-- ── Footer ── -->
-  <footer class="footer" id="studio">
+  <!-- Footer -->
+  <footer class="footer" id="agencia">
     <div class="footer-top">
       <div class="footer-brand">
         <span class="footer-logo">COGNVS</span>
-        <p>We engineer the mind.<br>We design the future.</p>
+        <p>Hacemos crecer marcas digitales con estrategia, creatividad y performance.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
-          <span class="footer-col-title">STUDIO</span>
-          <a href="#">About</a>
-          <a href="#">Work</a>
-          <a href="#">Process</a>
+          <span class="footer-col-title">SERVICIOS</span>
+          <a href="#">Paid Media</a>
+          <a href="#">Content Strategy</a>
+          <a href="#">SEO & Analytics</a>
         </div>
         <div class="footer-col">
-          <span class="footer-col-title">CONNECT</span>
-          <a href="#">Instagram</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">Dribbble</a>
+          <span class="footer-col-title">AGENCIA</span>
+          <a href="#">Nosotros</a>
+          <a href="#">Casos de Éxito</a>
+          <a href="#">Blog</a>
         </div>
         <div class="footer-col">
-          <span class="footer-col-title">CONTACT</span>
-          <a href="mailto:hello@cognvs.com">hello@cognvs.com</a>
-          <span>New York / Buenos Aires</span>
+          <span class="footer-col-title">CONTACTO</span>
+          <a href="mailto:hola@cognvs.com">hola@cognvs.com</a>
+          <span>Buenos Aires / Madrid</span>
         </div>
       </div>
     </div>
-    <div class="footer-divider"></div>
+    <div class="footer-div"></div>
     <div class="footer-bottom">
-      <span>© 2026 COGNVS. All rights reserved.</span>
-      <span>Privacy Policy&nbsp;·&nbsp;Terms of Use</span>
+      <span>© 2026 COGNVS. Todos los derechos reservados.</span>
+      <span>Política de Privacidad&nbsp;·&nbsp;Términos de Uso</span>
     </div>
   </footer>
 
