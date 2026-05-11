@@ -223,9 +223,8 @@
 
     /* Services */
     .services { background: #0d0d0d; padding: 100px 120px; }
-    .services-hd { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
-    .services-hd h2 { font-family: var(--serif); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; }
-    .services-hd p { font-size: 15px; color: var(--dim); line-height: 1.6; text-align: right; }
+    .services-hd { display: flex; flex-direction: column; gap: 20px; margin-bottom: 56px; }
+    .services-hd h2 { font-family: var(--serif); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; line-height: 1.1; }
     .services-div { width: 100%; height: 1px; background: var(--border); }
     .services-grid { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; }
     .srv { display: flex; flex-direction: column; gap: 18px; padding: 48px 0; }
@@ -323,7 +322,7 @@
     <div class="scene-content">
       <div class="badge">MARKETING DIGITAL</div>
       <h1>Hacemos crecer<br>tu marca</h1>
-      <p>Estrategia, contenido y performance para marcas que quieren liderar su industria digital.</p>
+      <p>Potenciamos tu presencia digital con estrategias de alto impacto que convierten audiencias en clientes.</p>
       <div class="btn-row">
         <a href="#contacto" class="btn btn-gold">Ver resultados</a>
         <a href="#casos" class="btn btn-ghost">Nuestros servicios&nbsp;→</a>
@@ -338,12 +337,12 @@
   <!-- Scene 2: Paid Media — visible de 25% a 50% -->
   <div id="scene2" class="scene">
     <div class="scene-content">
-      <span class="overline">01 — PAID MEDIA</span>
-      <h2>Inversión que<br>genera retorno real</h2>
-      <p>Campañas en Google, Meta y TikTok optimizadas para maximizar tu ROI desde el primer día.</p>
+      <span class="overline">PAID MEDIA</span>
+      <h2>Inversión que<br>genera retorno</h2>
+      <p>Campañas en Google, Meta y plataformas programáticas optimizadas para maximizar tu ROAS desde el primer día.</p>
       <div class="metric">
         <span class="metric-num">4.2×</span>
-        <span class="metric-label">ROI PROMEDIO</span>
+        <span class="metric-label">ROAS PROMEDIO</span>
       </div>
     </div>
   </div>
@@ -351,12 +350,12 @@
   <!-- Scene 3: Content Strategy — visible de 50% a 75% -->
   <div id="scene3" class="scene">
     <div class="scene-content">
-      <span class="overline">02 — CONTENT STRATEGY</span>
-      <h2>Contenido que<br>conecta y convierte</h2>
-      <p>Narrativas de marca que capturan atención y transforman audiencias en clientes leales.</p>
+      <span class="overline">CONTENT STRATEGY</span>
+      <h2>Contenido que<br>conecta</h2>
+      <p>Estrategias de contenido que posicionan tu marca y generan comunidad real alrededor de tu negocio.</p>
       <div class="metric">
         <span class="metric-num">280%</span>
-        <span class="metric-label">CRECIMIENTO ORGÁNICO</span>
+        <span class="metric-label">ENGAGEMENT INCREASE</span>
       </div>
     </div>
   </div>
@@ -364,10 +363,9 @@
   <!-- Scene 4: CTA — visible de 75% a 100% -->
   <div id="scene4" class="scene">
     <div class="scene-content">
-      <span class="overline">¿LISTO PARA CRECER?</span>
-      <h2>Empecemos a<br>trabajar juntos</h2>
-      <p>Agenda una sesión estratégica gratuita y descubre cómo escalar tu marca.</p>
-      <a href="#contacto" class="btn btn-gold btn-lg">Agendar llamada gratuita</a>
+      <span class="overline">SIGUIENTE PASO</span>
+      <h2>Empecemos a<br>trabajar</h2>
+      <a href="#contacto" class="btn btn-gold btn-lg">Empezar ahora →</a>
     </div>
   </div>
 
@@ -395,49 +393,49 @@
 
   <section class="solid stats" id="servicios">
     <div class="stat">
-      <span class="stat-n">250<sup style="font-size:.55em;vertical-align:super">+</sup></span>
-      <span class="stat-l">Marcas Escaladas</span>
+      <span class="stat-n gold">+200</span>
+      <span class="stat-l">Clientes Activos</span>
     </div>
     <div class="stat-sep"></div>
     <div class="stat">
-      <span class="stat-n gold">4.2×</span>
-      <span class="stat-l">ROI Promedio</span>
+      <span class="stat-n">98%</span>
+      <span class="stat-l">Tasa de Retención</span>
     </div>
     <div class="stat-sep"></div>
     <div class="stat">
-      <span class="stat-n">8</span>
-      <span class="stat-l">Años de Experiencia</span>
+      <span class="stat-n gold">5×</span>
+      <span class="stat-l">ROAS Promedio</span>
     </div>
     <div class="stat-sep"></div>
     <div class="stat">
-      <span class="stat-n">94%</span>
-      <span class="stat-l">Retención de Clientes</span>
+      <span class="stat-n">12</span>
+      <span class="stat-l">Países</span>
     </div>
   </section>
 
   <section class="solid services" id="casos">
     <div class="services-hd">
-      <h2>Todo lo que<br>tu marca necesita</h2>
-      <p>Tres disciplinas.<br>Una visión unificada.</p>
+      <span class="overline" style="font-size:11px;">NUESTROS SERVICIOS</span>
+      <h2>Servicios que<br>importan</h2>
     </div>
     <div class="services-div"></div>
     <div class="services-grid">
       <div class="srv">
         <span class="srv-num">01</span>
-        <h3>Paid Media &<br>Performance</h3>
-        <p>Google Ads, Meta Ads, TikTok Ads. Campañas con ROAS positivo desde la primera semana.</p>
+        <h3>Paid Media</h3>
+        <p>Campañas de alto rendimiento en Google, Meta y plataformas programáticas.</p>
       </div>
       <div class="srv-sep"></div>
       <div class="srv">
         <span class="srv-num">02</span>
-        <h3>Content &<br>Social Media</h3>
-        <p>Estrategia editorial y gestión de comunidades que construyen marca y generan demanda real.</p>
+        <h3>Content Strategy</h3>
+        <p>Estrategias de contenido que posicionan tu marca y generan comunidad real.</p>
       </div>
       <div class="srv-sep"></div>
       <div class="srv">
         <span class="srv-num">03</span>
         <h3>SEO &<br>Analytics</h3>
-        <p>Posicionamiento orgánico y dashboards personalizados para decisiones basadas en datos.</p>
+        <p>Optimización técnica y análisis de datos para decisiones más inteligentes.</p>
       </div>
     </div>
   </section>
@@ -445,10 +443,10 @@
   <section class="solid cta-sec" id="contacto">
     <div class="cta-inner">
       <div class="gold-line"></div>
-      <h2>Tu próximo cliente<br>ya está buscándote</h2>
-      <p>Agenda una sesión estratégica gratuita. Sin compromisos — solo resultados.</p>
+      <h2>¿Listo para<br>crecer?</h2>
+      <p>Cuéntanos tu proyecto y construimos juntos una estrategia que genera resultados reales.</p>
       <div class="cta-row">
-        <a href="mailto:hola@cognvs.com" class="btn btn-gold btn-lg">Agendar sesión gratuita</a>
+        <a href="mailto:hola@cognvs.com" class="btn btn-gold btn-lg">Empezar ahora</a>
         <span class="cta-mail">hola@cognvs.com</span>
       </div>
     </div>
@@ -458,7 +456,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <span class="footer-logo">COGNVS</span>
-        <p>Hacemos crecer marcas digitales con estrategia, creatividad y performance.</p>
+        <p>Transformamos marcas con estrategias digitales de alto impacto.</p>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
@@ -468,15 +466,14 @@
           <a href="#">SEO & Analytics</a>
         </div>
         <div class="footer-col">
-          <span class="footer-col-t">AGENCIA</span>
-          <a href="#">Nosotros</a>
-          <a href="#">Casos de Éxito</a>
-          <a href="#">Blog</a>
+          <span class="footer-col-t">EMPRESA</span>
+          <a href="#">Sobre nosotros</a>
+          <a href="#">Casos de éxito</a>
         </div>
         <div class="footer-col">
           <span class="footer-col-t">CONTACTO</span>
           <a href="mailto:hola@cognvs.com">hola@cognvs.com</a>
-          <span>Buenos Aires / Madrid</span>
+          <span>Ciudad de México</span>
         </div>
       </div>
     </div>
@@ -503,7 +500,7 @@
     // Cada escena ocupa SCROLL_TRACK_VH / número_de_escenas.
     // 400vh = 4 escenas × 100vh cada una.
     // Aumenta para una experiencia más lenta y cinematográfica.
-    const SCROLL_TRACK_VH = 1400;
+    const SCROLL_TRACK_VH = 500;
 
     // KEYFRAMES: definen la curva scroll → tiempo del video.
     // ─────────────────────────────────────────────────────────
