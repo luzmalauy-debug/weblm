@@ -1,0 +1,1274 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "COGNVS — Landing Page",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": "#0F0F0F",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "YTTjK",
+          "x": 0,
+          "y": 0,
+          "name": "Video BG",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 160,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#1c1c1c",
+                "position": 0
+              },
+              {
+                "color": "#050505",
+                "position": 1
+              }
+            ]
+          },
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "SbEvF",
+          "x": 0,
+          "y": 0,
+          "name": "Navbar",
+          "width": 1440,
+          "height": 70,
+          "fill": "#00000000",
+          "padding": [
+            0,
+            60
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "D8Fue",
+              "name": "navLogo",
+              "fill": "#FAF8F5",
+              "content": "COGNVS",
+              "fontFamily": "Playfair Display",
+              "fontSize": 18,
+              "letterSpacing": 3
+            },
+            {
+              "type": "frame",
+              "id": "g0imJe",
+              "name": "navLinks",
+              "fill": "#00000000",
+              "gap": 40,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "zCcW0",
+                  "name": "l1",
+                  "fill": "#888888",
+                  "content": "Process",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "wKeBR",
+                  "name": "l2",
+                  "fill": "#888888",
+                  "content": "Work",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "zHMAa",
+                  "name": "l3",
+                  "fill": "#888888",
+                  "content": "Studio",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gXQOE",
+              "name": "ctaWrap",
+              "fill": "#C9A962",
+              "padding": [
+                10,
+                24
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "O5XOG",
+                  "name": "ctaTxt",
+                  "fill": "#0A0A0A",
+                  "content": "Get Started",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "t1CnZo",
+          "x": 120,
+          "y": 190,
+          "name": "Hero Content",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "PHWIS",
+              "name": "badge",
+              "fill": "#1F1A0E",
+              "padding": [
+                6,
+                18
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "i4QLKf",
+                  "name": "badgeTxt",
+                  "fill": "#C9A962",
+                  "content": "REDEFINING INTELLIGENCE",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 3
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "WkRqv",
+              "name": "Headline",
+              "fill": "#FAF8F5",
+              "textGrowth": "fixed-width",
+              "width": 700,
+              "content": "Creatividad\ndigital",
+              "lineHeight": 1.05,
+              "fontFamily": "Playfair Display",
+              "fontSize": 80
+            },
+            {
+              "type": "text",
+              "id": "Q02fm",
+              "name": "sub",
+              "fill": "#888888",
+              "textGrowth": "fixed-width",
+              "width": 620,
+              "content": "Somos una agencia que busca el clic creativo\nen cada trabajo realizado.",
+              "lineHeight": 1.75,
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "ARqKx",
+              "name": "ctaRow",
+              "fill": "#00000000",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xEsdJ",
+                  "name": "btnGold",
+                  "fill": "#C9A962",
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cV8Bx",
+                      "name": "btnGoldTxt",
+                      "fill": "#0A0A0A",
+                      "content": "Explore Our Work",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "McY77",
+                  "name": "btnGhost",
+                  "fill": "#00000000",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#FFFFFF26"
+                  },
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "M6xBs",
+                      "name": "btnGhostTxt",
+                      "fill": "#FAF8F5",
+                      "content": "Our Philosophy →",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "neuMD",
+              "name": "scrollHint",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Ok58e",
+                  "name": "scrollTxt",
+                  "fill": "#888888",
+                  "content": "SCROLL",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "normal",
+                  "letterSpacing": 3
+                },
+                {
+                  "type": "rectangle",
+                  "id": "QFi1v",
+                  "name": "scrollLine",
+                  "fill": "#C9A962",
+                  "width": 1,
+                  "height": 40
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "bmCOa",
+      "x": 1540,
+      "y": 0,
+      "name": "02 — Ideas",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0F0F0F",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "uvO00",
+          "x": 0,
+          "y": 0,
+          "name": "ideasBg",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 200,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#111111",
+                "position": 0
+              },
+              {
+                "color": "#050505",
+                "position": 1
+              }
+            ]
+          },
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "J00Op9",
+          "x": 760,
+          "y": 160,
+          "name": "Ideas Content",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 28,
+          "children": [
+            {
+              "type": "text",
+              "id": "eMPNU",
+              "name": "overline",
+              "fill": "#C9A962",
+              "content": "OUR PHILOSOPHY",
+              "fontFamily": "Inter",
+              "fontSize": 11,
+              "fontWeight": "600",
+              "letterSpacing": 3
+            },
+            {
+              "type": "text",
+              "id": "A6xoDq",
+              "name": "ideasH2",
+              "fill": "#FAF8F5",
+              "textGrowth": "fixed-width",
+              "width": 580,
+              "content": "Ideas Are Alive.\nLet Them Breathe.",
+              "lineHeight": 1.1,
+              "fontFamily": "Playfair Display",
+              "fontSize": 60
+            },
+            {
+              "type": "text",
+              "id": "og7Ud",
+              "name": "ideasP",
+              "fill": "#888888",
+              "textGrowth": "fixed-width",
+              "width": 480,
+              "content": "We believe in the organic process of creation — where thoughts are nurtured, challenged, and finally set free to transform the world around them.",
+              "lineHeight": 1.75,
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "mivLd",
+              "name": "bullets",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hQ9JY",
+                  "name": "b1",
+                  "fill": "#00000000",
+                  "gap": 14,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "id": "X9KaGl",
+                      "name": "dot1",
+                      "fill": "#C9A962",
+                      "width": 6,
+                      "height": 6
+                    },
+                    {
+                      "type": "text",
+                      "id": "K9PLWn",
+                      "name": "bt1",
+                      "fill": "#FAF8F5",
+                      "content": "Human-centered strategy",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PLNpV",
+                  "name": "b2",
+                  "fill": "#00000000",
+                  "gap": 14,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "id": "Y9zsUr",
+                      "name": "dot2",
+                      "fill": "#C9A962",
+                      "width": 6,
+                      "height": 6
+                    },
+                    {
+                      "type": "text",
+                      "id": "Wgt5q",
+                      "name": "bt2",
+                      "fill": "#FAF8F5",
+                      "content": "Systems thinking at every scale",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "G5khTh",
+                  "name": "b3",
+                  "fill": "#00000000",
+                  "gap": 14,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "id": "S1kZM0",
+                      "name": "dot3",
+                      "fill": "#C9A962",
+                      "width": 6,
+                      "height": 6
+                    },
+                    {
+                      "type": "text",
+                      "id": "I9hTe",
+                      "name": "bt3",
+                      "fill": "#FAF8F5",
+                      "content": "Craft that endures beyond trend",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "OFqdc",
+      "x": 3080,
+      "y": 0,
+      "name": "03 — Journey",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0F0F0F",
+      "layout": "none",
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "K10dQ",
+          "x": 0,
+          "y": 0,
+          "name": "jBg",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#0f0f0f",
+                "position": 0
+              },
+              {
+                "color": "#030303",
+                "position": 1
+              }
+            ]
+          },
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "type": "frame",
+          "id": "N5Epy",
+          "x": 310,
+          "y": 200,
+          "name": "Journey Content",
+          "width": 820,
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 28,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "tz2ZA",
+              "name": "jBadge",
+              "fill": "#1F1A0E",
+              "padding": [
+                6,
+                18
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "r1oFsu",
+                  "name": "jBadgeTxt",
+                  "fill": "#C9A962",
+                  "content": "BEGIN YOUR JOURNEY",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 3
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "ZFsoe",
+              "name": "jH2",
+              "fill": "#FAF8F5",
+              "textGrowth": "fixed-width",
+              "width": 820,
+              "content": "Your Vision.\nEngineered.",
+              "lineHeight": 1.05,
+              "textAlign": "center",
+              "fontFamily": "Playfair Display",
+              "fontSize": 78
+            },
+            {
+              "type": "text",
+              "id": "bytsq",
+              "name": "jP",
+              "fill": "#888888",
+              "content": "Let's build something that outlasts the moment.",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "vU5Bw",
+              "name": "jBtn",
+              "fill": "#C9A962",
+              "padding": [
+                18,
+                48
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "zvNe9",
+                  "name": "jBtnTxt",
+                  "fill": "#0A0A0A",
+                  "content": "Start a Project",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "znQMe",
+      "x": 4620,
+      "y": 0,
+      "name": "04 — Services",
+      "width": 1440,
+      "height": 900,
+      "fill": "#0A0A0A",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Cp9r7",
+          "x": 120,
+          "y": 100,
+          "name": "Services Header",
+          "width": 1200,
+          "fill": "#00000000",
+          "justifyContent": "space_between",
+          "alignItems": "end",
+          "children": [
+            {
+              "type": "text",
+              "id": "IdSzN",
+              "name": "sH2",
+              "fill": "#FAF8F5",
+              "content": "What We Create",
+              "fontFamily": "Playfair Display",
+              "fontSize": 48
+            },
+            {
+              "type": "text",
+              "id": "hzETj",
+              "name": "sSub",
+              "fill": "#666666",
+              "textGrowth": "fixed-width",
+              "width": 220,
+              "content": "Three disciplines.\nOne unified vision.",
+              "textAlign": "right",
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "F2cwL",
+          "x": 120,
+          "y": 200,
+          "name": "Divider",
+          "fill": "#1F1F1F",
+          "width": 1200,
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "T5AxBW",
+          "x": 120,
+          "y": 200,
+          "name": "Services Grid",
+          "width": 1200,
+          "fill": "#00000000",
+          "children": [
+            {
+              "type": "frame",
+              "id": "sTG1p",
+              "name": "card1",
+              "width": "fill_container",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                52,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "dChcC",
+                  "name": "num1",
+                  "fill": "#C9A962",
+                  "content": "01",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "pM86u",
+                  "name": "cH1",
+                  "fill": "#FAF8F5",
+                  "textGrowth": "fixed-width",
+                  "width": 260,
+                  "content": "Brand\nStrategy",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 34
+                },
+                {
+                  "type": "text",
+                  "id": "Lq033",
+                  "name": "cP1",
+                  "fill": "#666666",
+                  "textGrowth": "fixed-width",
+                  "width": 260,
+                  "content": "We define how brands think, speak, and stand apart in saturated markets — building identities that endure.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "oE3Gz",
+              "name": "sep1",
+              "fill": "#1F1F1F",
+              "width": 1,
+              "height": "fill_container"
+            },
+            {
+              "type": "frame",
+              "id": "UEkSs",
+              "name": "card2",
+              "width": "fill_container",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                52,
+                0,
+                52,
+                52
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "L39Aas",
+                  "name": "num2",
+                  "fill": "#C9A962",
+                  "content": "02",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "S7RmLj",
+                  "name": "cH2",
+                  "fill": "#FAF8F5",
+                  "textGrowth": "fixed-width",
+                  "width": 260,
+                  "content": "Digital\nExperience",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 34
+                },
+                {
+                  "type": "text",
+                  "id": "atyL8",
+                  "name": "cP2",
+                  "fill": "#666666",
+                  "textGrowth": "fixed-width",
+                  "width": 260,
+                  "content": "Interfaces that feel inevitable — where friction disappears and every interaction becomes intuitive.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "mJBzS",
+              "name": "sep2",
+              "fill": "#1F1F1F",
+              "width": 1,
+              "height": "fill_container"
+            },
+            {
+              "type": "frame",
+              "id": "ET0Lb",
+              "name": "card3",
+              "width": "fill_container",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                52,
+                0,
+                52,
+                52
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XBh3i",
+                  "name": "num3",
+                  "fill": "#C9A962",
+                  "content": "03",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "j4BvLc",
+                  "name": "cH3",
+                  "fill": "#FAF8F5",
+                  "textGrowth": "fixed-width",
+                  "width": 260,
+                  "content": "Creative\nDirection",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 34
+                },
+                {
+                  "type": "text",
+                  "id": "F5vQf",
+                  "name": "cP3",
+                  "fill": "#666666",
+                  "textGrowth": "fixed-width",
+                  "width": 260,
+                  "content": "The invisible thread that makes a campaign cohesive, a gallery beautiful, and a brand unmistakable.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ZbHJ3",
+      "x": 4620,
+      "y": 960,
+      "name": "05 — Stats",
+      "width": 1440,
+      "height": 220,
+      "fill": "#0A0A0A",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "k1DIR",
+          "x": 120,
+          "y": 0,
+          "name": "statsInner",
+          "width": 1200,
+          "height": 220,
+          "fill": "#00000000",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "OG3bU",
+              "name": "st1",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "La2eE",
+                  "name": "sn1",
+                  "fill": "#FAF8F5",
+                  "content": "200+",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 56
+                },
+                {
+                  "type": "text",
+                  "id": "B5bkO",
+                  "name": "sl1",
+                  "fill": "#666666",
+                  "content": "PROJECTS DELIVERED",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500",
+                  "letterSpacing": 1
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "pnd0V",
+              "name": "ssep1",
+              "fill": "#1F1F1F",
+              "width": 1,
+              "height": 80
+            },
+            {
+              "type": "frame",
+              "id": "IKIuZ",
+              "name": "st2",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vpN81",
+                  "name": "sn2",
+                  "fill": "#FAF8F5",
+                  "content": "12",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 56
+                },
+                {
+                  "type": "text",
+                  "id": "O8grFf",
+                  "name": "sl2",
+                  "fill": "#666666",
+                  "content": "YEARS OF CRAFT",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500",
+                  "letterSpacing": 1
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "RaFYn",
+              "name": "ssep2",
+              "fill": "#1F1F1F",
+              "width": 1,
+              "height": 80
+            },
+            {
+              "type": "frame",
+              "id": "Enyan",
+              "name": "st3",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wuSZR",
+                  "name": "sn3",
+                  "fill": "#C9A962",
+                  "content": "48",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 56
+                },
+                {
+                  "type": "text",
+                  "id": "yEsxE",
+                  "name": "sl3",
+                  "fill": "#666666",
+                  "content": "INDUSTRY AWARDS",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500",
+                  "letterSpacing": 1
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "v30ek2",
+              "name": "ssep3",
+              "fill": "#1F1F1F",
+              "width": 1,
+              "height": 80
+            },
+            {
+              "type": "frame",
+              "id": "zFDwV",
+              "name": "st4",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ExI6s",
+                  "name": "sn4",
+                  "fill": "#FAF8F5",
+                  "content": "94%",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 56
+                },
+                {
+                  "type": "text",
+                  "id": "sffj1",
+                  "name": "sl4",
+                  "fill": "#666666",
+                  "content": "CLIENT RETENTION",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500",
+                  "letterSpacing": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "IEisH",
+      "x": 4620,
+      "y": 1240,
+      "name": "06 — Footer",
+      "width": 1440,
+      "height": 480,
+      "fill": "#0A0A0A",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "zGvNB",
+          "x": 120,
+          "y": 80,
+          "name": "fTop",
+          "width": 1200,
+          "fill": "#00000000",
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "frame",
+              "id": "UXqxe",
+              "name": "fBrand",
+              "width": 300,
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eLdrc",
+                  "name": "fLogo",
+                  "fill": "#FAF8F5",
+                  "content": "COGNVS",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 18,
+                  "fontWeight": "normal",
+                  "letterSpacing": 3
+                },
+                {
+                  "type": "text",
+                  "id": "AjZ7c",
+                  "name": "fTagline",
+                  "fill": "#444444",
+                  "textGrowth": "fixed-width",
+                  "width": 280,
+                  "content": "We engineer the mind.\nWe design the future.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "o9QB9I",
+              "name": "fLinks",
+              "fill": "#00000000",
+              "gap": 80,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "v6ZS2T",
+                  "name": "col1",
+                  "fill": "#00000000",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "BvdV2",
+                      "name": "col1T",
+                      "fill": "#C9A962",
+                      "content": "STUDIO",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "yPXEI",
+                      "name": "cl1a",
+                      "fill": "#666666",
+                      "content": "About",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZPyoz",
+                      "name": "cl1b",
+                      "fill": "#666666",
+                      "content": "Work",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Vs0bv",
+                      "name": "cl1c",
+                      "fill": "#666666",
+                      "content": "Process",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "q129FR",
+                  "name": "col2",
+                  "fill": "#00000000",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZvOB1",
+                      "name": "col2T",
+                      "fill": "#C9A962",
+                      "content": "CONNECT",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "X6OJr",
+                      "name": "cl2a",
+                      "fill": "#666666",
+                      "content": "Instagram",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GuNw7",
+                      "name": "cl2b",
+                      "fill": "#666666",
+                      "content": "LinkedIn",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "twSAs",
+                      "name": "cl2c",
+                      "fill": "#666666",
+                      "content": "Dribbble",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VNdza",
+                  "name": "col3",
+                  "fill": "#00000000",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XnTwV",
+                      "name": "col3T",
+                      "fill": "#C9A962",
+                      "content": "CONTACT",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZzJEo",
+                      "name": "cl3a",
+                      "fill": "#666666",
+                      "content": "hello@cognvs.com",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "MZcIw",
+                      "name": "cl3b",
+                      "fill": "#666666",
+                      "content": "New York / Buenos Aires",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "n2uhw",
+          "x": 120,
+          "y": 360,
+          "name": "fDivider",
+          "fill": "#1F1F1F",
+          "width": 1200,
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "fmzSd",
+          "x": 120,
+          "y": 380,
+          "name": "fBottom",
+          "width": 1200,
+          "fill": "#00000000",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "kC1eM",
+              "name": "fCopy",
+              "fill": "#444444",
+              "content": "© 2026 COGNVS. All rights reserved.",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "fs5r5",
+              "name": "fPolicy",
+              "fill": "#444444",
+              "content": "Privacy Policy · Terms of Use",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
