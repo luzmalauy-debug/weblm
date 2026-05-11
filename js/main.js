@@ -1,4 +1,4 @@
-const TOTAL_FRAMES = 247;
+const TOTAL_FRAMES = 201;
 
 const canvas      = document.getElementById('videoCanvas');
 const ctx         = canvas.getContext('2d');
