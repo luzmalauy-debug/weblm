@@ -8,215 +8,739 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ============================================================
+       RESET & TOKENS
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0a0a0a;
+      --gold:   #C9A962;
+      --gold-t: rgba(201, 169, 98, 0.13);
+      --text:   #FAF8F5;
+      --muted:  #888;
+      --dim:    #555;
+      --border: #1f1f1f;
+      --serif:  'Playfair Display', Georgia, serif;
+      --sans:   'Manrope', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+
+    /* ============================================================
+       VIDEO STICKY — fijo en pantalla, nunca se mueve
+       ─────────────────────────────────────────────────────────
+       El tiempo del video se controla 100% por scroll.
+       NO tiene autoplay, loop ni controls.
+    ============================================================ */
+    #bgVideo {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;   /* cubre el viewport manteniendo aspecto */
+      z-index: 0;
+      background: #000;    /* fallback si el video no carga */
+    }
+
+    /* Overlay oscuro encima del video para legibilidad del texto */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.48);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       BARRA DE PROGRESO
+    ============================================================ */
+    #progressBar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--gold);
+      z-index: 200;
+      transition: width 0.04s linear;
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 68px;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    .navbar.solid {
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(16px);
+      border-color: var(--border);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 18px; letter-spacing: 3px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      font-size: 12px; font-weight: 600;
+      background: var(--gold); color: #0a0a0a;
+      padding: 9px 22px; text-decoration: none; transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ============================================================
+       SCENES — texto fijo encima del video
+       ─────────────────────────────────────────────────────────
+       Cada .scene está en position:fixed.
+       JS agrega/quita .visible según el progreso del scroll.
+       CSS transition maneja el crossfade entre escenas.
+    ============================================================ */
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      padding: 110px 120px 80px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;   /* crossfade suave entre escenas */
+    }
+    .scene.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .scene-content { display: flex; flex-direction: column; gap: 24px; max-width: 780px; }
+
+    /* ─ Tipografía de scenes ─ */
+    .badge {
+      display: inline-flex;
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      color: var(--gold); background: var(--gold-t);
+      padding: 6px 16px; width: fit-content;
+    }
+    .overline { font-size: 11px; font-weight: 600; letter-spacing: 3px; color: var(--gold); }
+
+    .scene h1 {
+      font-family: var(--serif);
+      font-size: clamp(50px, 6.5vw, 88px);
+      font-weight: 400; line-height: 1.05;
+    }
+    .scene h2 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 5.5vw, 74px);
+      font-weight: 400; line-height: 1.08;
+    }
+    .scene p { font-size: clamp(15px, 1.4vw, 18px); color: var(--muted); line-height: 1.75; max-width: 500px; }
+
+    /* ─ Métrica lateral ─ */
+    .metric {
+      display: flex; flex-direction: column; gap: 5px;
+      padding-left: 18px; border-left: 2px solid var(--gold); margin-top: 8px;
+    }
+    .metric-num { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); font-weight: 400; line-height: 1; }
+    .metric-label { font-size: 10px; font-weight: 600; letter-spacing: 3px; color: var(--gold); }
+
+    /* ─ Botones ─ */
+    .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; font-family: var(--sans);
+      font-size: 13px; font-weight: 600;
+      padding: 13px 30px; text-decoration: none;
+      transition: opacity 0.2s; white-space: nowrap;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-gold  { background: var(--gold); color: #0a0a0a; }
+    .btn-ghost { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid rgba(255,255,255,0.14); }
+    .btn-lg    { font-size: 15px; padding: 17px 44px; }
+
+    /* ─ Scroll hint ─ */
+    .scroll-hint { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 16px; transition: opacity 0.4s; }
+    .scroll-hint.hidden { opacity: 0; }
+    .scroll-hint span { font-size: 10px; letter-spacing: 3px; color: var(--muted); }
+    .scroll-arrow {
+      width: 1px; height: 38px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+      50%       { opacity: 1;   transform: scaleY(1);   transform-origin: top; }
+    }
+
+    /* ─ Dots indicadores de escena ─ */
+    .scene-dots {
+      position: fixed; right: 52px; top: 50%;
+      transform: translateY(-50%);
+      z-index: 50; display: flex;
+      flex-direction: column; align-items: center; gap: 10px;
+      pointer-events: none;
+    }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: height 0.35s ease, background 0.35s ease, border-radius 0.35s ease; }
+    .dot.active { background: var(--gold); height: 22px; border-radius: 2px; }
+
+    /* ============================================================
+       SCROLL TRACK
+       ─────────────────────────────────────────────────────────
+       Este div NO tiene contenido visual propio — su único
+       propósito es crear el espacio de scroll que el JS mide.
+       Su altura define cuánto dura la experiencia del video.
+       Cambia SCROLL_TRACK_VH en JS para ajustar.
+    ============================================================ */
+    #scrollTrack { position: relative; z-index: 5; }
+
+    /* ============================================================
+       SECCIONES SÓLIDAS (aparecen después del scroll del video)
+       ─────────────────────────────────────────────────────────
+       z-index:20 > scenes (z-index:10) → tapan el video y el texto fijo.
+       isolation:isolate + translate3d forzan capa de composición propia.
+    ============================================================ */
+    .solid { position: relative; z-index: 20; isolation: isolate; transform: translate3d(0,0,0); }
+
+    /* Stats */
+    .stats {
+      display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+      align-items: center; padding: 0 120px; height: 200px;
+      background: var(--bg); border-top: 1px solid var(--border);
+    }
+    .stat { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .stat-n { font-family: var(--serif); font-size: clamp(34px, 4vw, 52px); font-weight: 400; line-height: 1; }
+    .stat-n.gold { color: var(--gold); }
+    .stat-l { font-size: 11px; font-weight: 500; letter-spacing: 1px; color: var(--dim); text-transform: uppercase; }
+    .stat-sep { height: 70px; background: var(--border); }
+
+    /* Services */
+    .services { background: #0d0d0d; padding: 100px 120px; }
+    .services-hd { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+    .services-hd h2 { font-family: var(--serif); font-size: clamp(32px, 3.5vw, 48px); font-weight: 400; }
+    .services-hd p { font-size: 15px; color: var(--dim); line-height: 1.6; text-align: right; }
+    .services-div { width: 100%; height: 1px; background: var(--border); }
+    .services-grid { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; }
+    .srv { display: flex; flex-direction: column; gap: 18px; padding: 48px 0; }
+    .srv:nth-child(3), .srv:nth-child(5) { padding-left: 48px; }
+    .srv-sep { background: var(--border); }
+    .srv-num { font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--gold); }
+    .srv h3 { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 32px); font-weight: 400; line-height: 1.15; }
+    .srv p { font-size: 14px; color: var(--dim); line-height: 1.7; max-width: 280px; }
+
+    /* CTA */
+    .cta-sec { background: var(--bg); padding: 120px; border-top: 1px solid var(--border); }
+    .cta-inner { max-width: 760px; display: flex; flex-direction: column; gap: 28px; }
+    .gold-line { width: 44px; height: 2px; background: var(--gold); }
+    .cta-inner h2 { font-family: var(--serif); font-size: clamp(38px, 5vw, 68px); font-weight: 400; line-height: 1.08; }
+    .cta-inner > p { font-size: clamp(15px, 1.4vw, 18px); color: var(--muted); line-height: 1.75; }
+    .cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
+    .cta-mail { font-size: 13px; color: var(--dim); }
+
+    /* Footer */
+    .footer { background: #080808; padding: 72px 120px 0; }
+    .footer-top { display: flex; justify-content: space-between; padding-bottom: 56px; }
+    .footer-brand { display: flex; flex-direction: column; gap: 14px; max-width: 280px; }
+    .footer-logo { font-family: var(--serif); font-size: 18px; letter-spacing: 3px; }
+    .footer-brand p { font-size: 13px; color: #3a3a3a; line-height: 1.7; }
+    .footer-cols { display: flex; gap: 72px; }
+    .footer-col { display: flex; flex-direction: column; gap: 14px; }
+    .footer-col-t { font-size: 10px; font-weight: 600; letter-spacing: 2px; color: var(--gold); }
+    .footer-col a, .footer-col span { font-size: 13px; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-div { height: 1px; background: var(--border); }
+    .footer-bot { display: flex; justify-content: space-between; padding: 22px 0; font-size: 11px; color: #333; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .navbar { padding: 0 24px; }
+      .nav-links { display: none; }
+      .scene { padding: 100px 28px 60px; }
+      .scene-dots { right: 16px; }
+      .stats { grid-template-columns: 1fr 1fr; height: auto; padding: 44px 28px; gap: 28px; }
+      .stat-sep { display: none; }
+      .services { padding: 68px 28px; }
+      .services-hd { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .services-hd p { text-align: left; }
+      .services-grid { grid-template-columns: 1fr; }
+      .srv-sep { height: 1px; width: 100%; }
+      .srv:nth-child(3), .srv:nth-child(5) { padding-left: 0; }
+      .cta-sec { padding: 80px 28px; }
+      .footer { padding: 56px 28px 0; }
+      .footer-top { flex-direction: column; gap: 44px; }
+      .footer-cols { flex-wrap: wrap; gap: 36px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Loader -->
-  <div class="loader" id="loader">
-    <span class="loader-logo">COGNVS</span>
-    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
-    <span class="loader-pct" id="loaderPct">0%</span>
-  </div>
+  <!-- ============================================================
+    CÓMO FUNCIONA:
+    1. #bgVideo está fijo en pantalla (position:fixed).
+       Su currentTime se controla 100% por el scroll.
+    2. #scrollTrack crea el espacio de scroll (altura = SCROLL_TRACK_VH).
+    3. JS mapea scrollY → progreso (0–1) → tiempo del video
+       usando los KEYFRAMES con interpolación lineal entre cada par.
+    4. requestAnimationFrame hace un lerp suave evitando saltos.
+    5. Las .scene (texto) aparecen/desaparecen según su rango de scroll.
+  ============================================================ -->
 
-  <!-- Video canvas (fixed behind everything) -->
-  <canvas id="videoCanvas"></canvas>
+  <!-- VIDEO — src definido en JS con la variable VIDEO_SRC -->
+  <video id="bgVideo" preload="auto" muted playsinline webkit-playsinline></video>
   <div class="bg-overlay"></div>
+  <div id="progressBar"></div>
 
-  <!-- Gold progress bar -->
-  <div class="progress-bar" id="progressBar"></div>
-
-  <!-- Navbar -->
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <span class="nav-logo">COGNVS</span>
     <ul class="nav-links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#casos">Casos de Éxito</a></li>
-      <li><a href="#agencia">Agencia</a></li>
+      <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a href="#contacto" class="nav-cta">Empezar ahora</a>
   </nav>
 
-  <!-- Fixed scenes: content changes as video scrolls -->
-  <div class="scenes-wrap">
+  <!-- ============================================================
+    SCENES: texto superpuesto al video, fijo en pantalla.
+    Cada scene aparece en el rango definido en SCENES (JS).
+    ─────────────────────────────────────────────────────────────
+    Para cambiar textos: edita el HTML de cada .scene.
+    Para cambiar cuándo aparece: edita start/end en SCENES (JS).
+  ============================================================ -->
 
-    <!-- Scene 1: Hero intro -->
-    <div class="scene active" id="scene1">
-      <div class="scene-inner">
-        <div class="badge">MARKETING DIGITAL</div>
-        <h1>Hacemos crecer<br>tu marca</h1>
-        <p>Estrategia, contenido y performance para marcas que quieren liderar su industria digital.</p>
-        <div class="scene-ctas">
-          <a href="#contacto" class="btn btn-gold">Ver resultados</a>
-          <a href="#servicios" class="btn btn-ghost">Nuestros servicios&nbsp;→</a>
-        </div>
-        <div class="scroll-hint" id="scrollHint">
-          <span>SCROLL</span>
-          <div class="scroll-arrow"></div>
-        </div>
+  <!-- Scene 1: Hero — visible de 0% a 25% del scroll -->
+  <div id="scene1" class="scene visible">
+    <div class="scene-content">
+      <div class="badge">MARKETING DIGITAL</div>
+      <h1>Hacemos crecer<br>tu marca</h1>
+      <p>Estrategia, contenido y performance para marcas que quieren liderar su industria digital.</p>
+      <div class="btn-row">
+        <a href="#contacto" class="btn btn-gold">Ver resultados</a>
+        <a href="#casos" class="btn btn-ghost">Nuestros servicios&nbsp;→</a>
+      </div>
+      <div class="scroll-hint" id="scrollHint">
+        <span>SCROLL</span>
+        <div class="scroll-arrow"></div>
       </div>
     </div>
-
-    <!-- Scene 2: Paid Media -->
-    <div class="scene" id="scene2">
-      <div class="scene-inner">
-        <span class="overline">01 — PAID MEDIA</span>
-        <h2>Inversión que<br>genera retorno real</h2>
-        <p>Campañas de performance en Google, Meta y TikTok optimizadas para maximizar tu ROI desde el día uno.</p>
-        <div class="scene-metric">
-          <span class="metric-num">4.2×</span>
-          <span class="metric-label">ROI PROMEDIO</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scene 3: Content Strategy -->
-    <div class="scene" id="scene3">
-      <div class="scene-inner">
-        <span class="overline">02 — CONTENT STRATEGY</span>
-        <h2>Contenido que<br>conecta y convierte</h2>
-        <p>Creamos narrativas de marca que capturan atención y transforman audiencias en clientes leales.</p>
-        <div class="scene-metric">
-          <span class="metric-num">280%</span>
-          <span class="metric-label">CRECIMIENTO ORGÁNICO</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scene 4: SEO & Analytics -->
-    <div class="scene" id="scene4">
-      <div class="scene-inner">
-        <span class="overline">03 — SEO & ANALYTICS</span>
-        <h2>Datos que<br>impulsan decisiones</h2>
-        <p>Visibilidad orgánica y análisis profundo para que cada decisión esté respaldada por evidencia real.</p>
-        <div class="scene-metric">
-          <span class="metric-num">#1</span>
-          <span class="metric-label">EN BÚSQUEDAS ORGÁNICAS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scene 5: Closing CTA -->
-    <div class="scene" id="scene5">
-      <div class="scene-inner">
-        <span class="overline">¿LISTO PARA CRECER?</span>
-        <h2>Empecemos a<br>trabajar juntos</h2>
-        <p>Agenda una sesión estratégica gratuita y descubre cómo podemos escalar tu marca.</p>
-        <a href="#contacto" class="btn btn-gold btn-lg">Agendar llamada gratuita</a>
-      </div>
-    </div>
-
-    <!-- Scene progress dots -->
-    <div class="scene-dots">
-      <div class="scene-dot active"></div>
-      <div class="scene-dot"></div>
-      <div class="scene-dot"></div>
-      <div class="scene-dot"></div>
-      <div class="scene-dot"></div>
-    </div>
-
   </div>
 
-  <!-- Scroll spacer: 600vh = 5 viewport heights of video playthrough -->
-  <div class="page-spacer"></div>
+  <!-- Scene 2: Paid Media — visible de 25% a 50% -->
+  <div id="scene2" class="scene">
+    <div class="scene-content">
+      <span class="overline">01 — PAID MEDIA</span>
+      <h2>Inversión que<br>genera retorno real</h2>
+      <p>Campañas en Google, Meta y TikTok optimizadas para maximizar tu ROI desde el primer día.</p>
+      <div class="metric">
+        <span class="metric-num">4.2×</span>
+        <span class="metric-label">ROI PROMEDIO</span>
+      </div>
+    </div>
+  </div>
 
-  <!-- Stats -->
-  <section class="stats" id="servicios">
-    <div class="stat">
-      <span class="stat-num">250<sup>+</sup></span>
-      <span class="stat-label">Marcas Escaladas</span>
+  <!-- Scene 3: Content Strategy — visible de 50% a 75% -->
+  <div id="scene3" class="scene">
+    <div class="scene-content">
+      <span class="overline">02 — CONTENT STRATEGY</span>
+      <h2>Contenido que<br>conecta y convierte</h2>
+      <p>Narrativas de marca que capturan atención y transforman audiencias en clientes leales.</p>
+      <div class="metric">
+        <span class="metric-num">280%</span>
+        <span class="metric-label">CRECIMIENTO ORGÁNICO</span>
+      </div>
     </div>
-    <div class="stat-div"></div>
-    <div class="stat">
-      <span class="stat-num gold">4.2×</span>
-      <span class="stat-label">ROI Promedio</span>
+  </div>
+
+  <!-- Scene 4: CTA — visible de 75% a 100% -->
+  <div id="scene4" class="scene">
+    <div class="scene-content">
+      <span class="overline">¿LISTO PARA CRECER?</span>
+      <h2>Empecemos a<br>trabajar juntos</h2>
+      <p>Agenda una sesión estratégica gratuita y descubre cómo escalar tu marca.</p>
+      <a href="#contacto" class="btn btn-gold btn-lg">Agendar llamada gratuita</a>
     </div>
-    <div class="stat-div"></div>
+  </div>
+
+  <!-- Dots indicadores de escena activa -->
+  <div class="scene-dots" id="sceneDots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- ============================================================
+    SCROLL TRACK
+    ─────────────────────────────────────────────────────────────
+    Solo crea espacio de scroll. Altura = SCROLL_TRACK_VH en JS.
+    Los elementos fijos (video, texto) no consumen espacio de flujo,
+    por eso este div arranca en y=0.
+  ============================================================ -->
+  <div id="scrollTrack"></div>
+
+  <!-- ============================================================
+    SECCIONES SÓLIDAS — aparecen después del video
+    z-index:20 las hace tapan todo lo fijo (video + scenes).
+  ============================================================ -->
+
+  <section class="solid stats" id="servicios">
     <div class="stat">
-      <span class="stat-num">8</span>
-      <span class="stat-label">Años de Experiencia</span>
+      <span class="stat-n">250<sup style="font-size:.55em;vertical-align:super">+</sup></span>
+      <span class="stat-l">Marcas Escaladas</span>
     </div>
-    <div class="stat-div"></div>
+    <div class="stat-sep"></div>
     <div class="stat">
-      <span class="stat-num">94<sup>%</sup></span>
-      <span class="stat-label">Retención de Clientes</span>
+      <span class="stat-n gold">4.2×</span>
+      <span class="stat-l">ROI Promedio</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-n">8</span>
+      <span class="stat-l">Años de Experiencia</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <span class="stat-n">94%</span>
+      <span class="stat-l">Retención de Clientes</span>
     </div>
   </section>
 
-  <!-- Services detail -->
-  <section class="services-detail" id="casos">
-    <div class="services-detail-header">
-      <span class="overline">NUESTROS SERVICIOS</span>
+  <section class="solid services" id="casos">
+    <div class="services-hd">
       <h2>Todo lo que<br>tu marca necesita</h2>
+      <p>Tres disciplinas.<br>Una visión unificada.</p>
     </div>
-    <div class="services-detail-grid">
-      <div class="service-item">
-        <span class="service-num">01</span>
+    <div class="services-div"></div>
+    <div class="services-grid">
+      <div class="srv">
+        <span class="srv-num">01</span>
         <h3>Paid Media &<br>Performance</h3>
-        <p>Google Ads, Meta Ads, TikTok Ads. Campañas optimizadas para conversión y ROAS positivo desde la primera semana.</p>
+        <p>Google Ads, Meta Ads, TikTok Ads. Campañas con ROAS positivo desde la primera semana.</p>
       </div>
-      <div class="service-sep"></div>
-      <div class="service-item">
-        <span class="service-num">02</span>
+      <div class="srv-sep"></div>
+      <div class="srv">
+        <span class="srv-num">02</span>
         <h3>Content &<br>Social Media</h3>
-        <p>Estrategia editorial, producción de contenido y gestión de comunidades que construyen marca y generan demanda.</p>
+        <p>Estrategia editorial y gestión de comunidades que construyen marca y generan demanda real.</p>
       </div>
-      <div class="service-sep"></div>
-      <div class="service-item">
-        <span class="service-num">03</span>
+      <div class="srv-sep"></div>
+      <div class="srv">
+        <span class="srv-num">03</span>
         <h3>SEO &<br>Analytics</h3>
-        <p>Posicionamiento orgánico, auditorías técnicas y dashboards personalizados para tomar decisiones con datos reales.</p>
+        <p>Posicionamiento orgánico y dashboards personalizados para decisiones basadas en datos.</p>
       </div>
     </div>
   </section>
 
-  <!-- CTA section -->
-  <section class="cta-section" id="contacto">
+  <section class="solid cta-sec" id="contacto">
     <div class="cta-inner">
       <div class="gold-line"></div>
       <h2>Tu próximo cliente<br>ya está buscándote</h2>
       <p>Agenda una sesión estratégica gratuita. Sin compromisos — solo resultados.</p>
       <div class="cta-row">
         <a href="mailto:hola@cognvs.com" class="btn btn-gold btn-lg">Agendar sesión gratuita</a>
-        <span class="cta-email">hola@cognvs.com</span>
+        <span class="cta-mail">hola@cognvs.com</span>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer" id="agencia">
+  <footer class="solid footer">
     <div class="footer-top">
       <div class="footer-brand">
         <span class="footer-logo">COGNVS</span>
         <p>Hacemos crecer marcas digitales con estrategia, creatividad y performance.</p>
       </div>
-      <div class="footer-links">
+      <div class="footer-cols">
         <div class="footer-col">
-          <span class="footer-col-title">SERVICIOS</span>
+          <span class="footer-col-t">SERVICIOS</span>
           <a href="#">Paid Media</a>
           <a href="#">Content Strategy</a>
           <a href="#">SEO & Analytics</a>
         </div>
         <div class="footer-col">
-          <span class="footer-col-title">AGENCIA</span>
+          <span class="footer-col-t">AGENCIA</span>
           <a href="#">Nosotros</a>
           <a href="#">Casos de Éxito</a>
           <a href="#">Blog</a>
         </div>
         <div class="footer-col">
-          <span class="footer-col-title">CONTACTO</span>
+          <span class="footer-col-t">CONTACTO</span>
           <a href="mailto:hola@cognvs.com">hola@cognvs.com</a>
           <span>Buenos Aires / Madrid</span>
         </div>
       </div>
     </div>
     <div class="footer-div"></div>
-    <div class="footer-bottom">
+    <div class="footer-bot">
       <span>© 2026 COGNVS. Todos los derechos reservados.</span>
       <span>Política de Privacidad&nbsp;·&nbsp;Términos de Uso</span>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+
+  <!-- ============================================================
+    JAVASCRIPT — VERSIÓN VANILLA
+  ============================================================ -->
+  <script>
+    /* ===========================================================
+       ✦ CONFIGURACIÓN — EDITA AQUÍ PARA PERSONALIZAR
+    =========================================================== */
+
+    // URL del video (relativa o absoluta)
+    const VIDEO_SRC = 'media/todo.mp4';
+
+    // Duración del scroll track en vh.
+    // Cada escena ocupa SCROLL_TRACK_VH / número_de_escenas.
+    // 400vh = 4 escenas × 100vh cada una.
+    // Aumenta para una experiencia más lenta y cinematográfica.
+    const SCROLL_TRACK_VH = 400;
+
+    // KEYFRAMES: definen la curva scroll → tiempo del video.
+    // ─────────────────────────────────────────────────────────
+    // scroll: progreso del scroll (0.0 = inicio, 1.0 = fin del track)
+    // time:   tiempo en segundos del video en ese punto
+    //
+    // Entre dos keyframes, el tiempo se interpola linealmente.
+    // Si el time supera la duración real del video, se clampea.
+    // ─────────────────────────────────────────────────────────
+    const KEYFRAMES = [
+      { scroll: 0.00, time: 0  },   // scroll  0% → video en  0s (inicio)
+      { scroll: 0.25, time: 4  },   // scroll 25% → video en  4s
+      { scroll: 0.50, time: 9  },   // scroll 50% → video en  9s
+      { scroll: 0.75, time: 14 },   // scroll 75% → video en 14s
+      { scroll: 1.00, time: 20 },   // scroll 100%→ video en 20s (se clampea a duración real)
+    ];
+
+    // SCENES: cuándo aparece/desaparece cada bloque de texto.
+    // ─────────────────────────────────────────────────────────
+    // start/end corresponden al progreso del scroll (0.0 – 1.0).
+    // La scene es visible cuando progress >= start && progress < end.
+    // ─────────────────────────────────────────────────────────
+    const SCENES = [
+      { id: 'scene1', start: 0.00, end: 0.25 },  // 0%  – 25%
+      { id: 'scene2', start: 0.25, end: 0.50 },  // 25% – 50%
+      { id: 'scene3', start: 0.50, end: 0.75 },  // 50% – 75%
+      { id: 'scene4', start: 0.75, end: 1.00 },  // 75% – 100%
+    ];
+
+    // Factor de suavizado para el lerp del tiempo del video.
+    // 0.05 = muy suave (puede quedar atrás en scrolls rápidos)
+    // 0.20 = casi directo
+    // Recomendado: 0.10 – 0.15
+    const LERP_FACTOR = 0.12;
+
+    /* ===========================================================
+       LÓGICA INTERNA — no necesitas editar esto normalmente
+    =========================================================== */
+
+    const video       = document.getElementById('bgVideo');
+    const progressBar = document.getElementById('progressBar');
+    const navbar      = document.getElementById('navbar');
+    const scrollHint  = document.getElementById('scrollHint');
+    const scrollTrack = document.getElementById('scrollTrack');
+    const dots        = document.querySelectorAll('.dot');
+    const sceneEls    = SCENES.map(s => document.getElementById(s.id));
+
+    let isReady    = false;  // true cuando el video tiene metadata
+    let lerpedTime = 0;      // tiempo actual del video (suavizado con lerp)
+    let targetTime = 0;      // tiempo objetivo calculado desde el scroll
+
+    // ── 1. Configurar el video ──────────────────────────────────
+    video.src = VIDEO_SRC;
+
+    video.addEventListener('loadedmetadata', () => {
+      isReady = true;
+      video.pause();        // asegurar que no se reproduzca solo
+      video.currentTime = 0;
+
+      // Clampear todos los keyframes a la duración real del video
+      // (útil si el video es más corto que los tiempos definidos)
+      KEYFRAMES.forEach(kf => {
+        kf.time = Math.min(kf.time, video.duration);
+      });
+    });
+
+    // ── 2. Aplicar altura al scroll track ──────────────────────
+    scrollTrack.style.height = SCROLL_TRACK_VH + 'vh';
+
+    // ── 3. Interpolación lineal entre keyframes ─────────────────
+    // Recibe progreso (0–1), devuelve el tiempo del video en segundos.
+    function getTargetTime(progress) {
+      progress = Math.max(0, Math.min(1, progress));
+
+      for (let i = 0; i < KEYFRAMES.length - 1; i++) {
+        const a = KEYFRAMES[i];
+        const b = KEYFRAMES[i + 1];
+
+        if (progress >= a.scroll && progress <= b.scroll) {
+          // t = posición normalizada dentro de este segmento (0–1)
+          const t = (progress - a.scroll) / (b.scroll - a.scroll);
+          // Interpolación lineal: mezcla entre tiempo a y tiempo b
+          return a.time + t * (b.time - a.time);
+        }
+      }
+
+      return KEYFRAMES[KEYFRAMES.length - 1].time;
+    }
+
+    // ── 4. Calcular progreso del scroll dentro del track ────────
+    // Devuelve 0.0 al inicio del track, 1.0 al final.
+    // Permanece en 0 antes del track y en 1 después.
+    function getScrollProgress() {
+      const trackTop    = scrollTrack.offsetTop;
+      const trackHeight = scrollTrack.offsetHeight - window.innerHeight;
+      if (trackHeight <= 0) return 0;
+      const scrolled = window.scrollY - trackTop;
+      return Math.max(0, Math.min(1, scrolled / trackHeight));
+    }
+
+    // ── 5. Activar la scene correcta según el progreso ──────────
+    function updateScenes(progress) {
+      // Encontrar el índice de la scene activa
+      // (la última cuyo start <= progress y cuyo end > progress)
+      let activeIdx = SCENES.length - 1;
+      for (let i = 0; i < SCENES.length; i++) {
+        if (progress < SCENES[i].end) { activeIdx = i; break; }
+      }
+
+      // Si el usuario ya pasó el track, ocultar todas las scenes
+      const pastTrack = window.scrollY >= scrollTrack.offsetTop + scrollTrack.offsetHeight;
+
+      sceneEls.forEach((el, i) => {
+        el.classList.toggle('visible', !pastTrack && i === activeIdx);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', !pastTrack && i === activeIdx);
+      });
+    }
+
+    // ── 6. Loop principal con requestAnimationFrame ─────────────
+    // Corre a ~60fps. Aplica lerp entre lerpedTime y targetTime.
+    // Solo actualiza currentTime si la diferencia es significativa.
+    function rafLoop() {
+      if (isReady) {
+        const diff = targetTime - lerpedTime;
+
+        if (Math.abs(diff) > 0.001) {
+          lerpedTime += diff * LERP_FACTOR;
+
+          const clampedTime = Math.max(0, Math.min(lerpedTime, video.duration || 0));
+
+          // fastSeek (Firefox) es más rápido pero menos preciso;
+          // currentTime (Chrome/Safari) es más preciso.
+          if (video.fastSeek) {
+            video.fastSeek(clampedTime);
+          } else {
+            video.currentTime = clampedTime;
+          }
+        }
+      }
+
+      requestAnimationFrame(rafLoop);
+    }
+
+    // ── 7. Scroll handler (pasivo para no bloquear el scroll) ───
+    window.addEventListener('scroll', () => {
+      const progress = getScrollProgress();
+
+      // Actualizar tiempo objetivo del video
+      targetTime = getTargetTime(progress);
+
+      // Actualizar UI
+      updateScenes(progress);
+      progressBar.style.width = (progress * 100) + '%';
+      navbar.classList.toggle('solid', window.scrollY > 60);
+      scrollHint.classList.toggle('hidden', window.scrollY > 80);
+
+    }, { passive: true });
+
+    // ── 8. Init ─────────────────────────────────────────────────
+    updateScenes(0);
+    requestAnimationFrame(rafLoop);
+  </script>
+
+
+  <!-- ============================================================
+    VERSIÓN ALTERNATIVA CON GSAP SCROLLTRIGGER
+    ─────────────────────────────────────────────────────────────
+    Para activar esta versión:
+      1. Descomenta los dos <script src="...gsap..."> de abajo.
+      2. Descomenta el bloque <script> con la etiqueta GSAP VERSION.
+      3. Comenta o elimina el bloque <script> VANILLA de arriba.
+
+    Ventajas de GSAP: scrub más refinado, timeline integrado,
+    mejor soporte para reverse scroll, y ecosistema de plugins.
+  ============================================================ -->
+
+  <!--
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  -->
+
+  <!--
+  <script>
+    // ── GSAP VERSION ─────────────────────────────────────────────
+    // Usa las mismas variables VIDEO_SRC, KEYFRAMES y SCENES
+    // definidas arriba en la sección CONFIGURACIÓN.
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const videoGSAP = document.getElementById('bgVideo');
+    videoGSAP.src   = VIDEO_SRC;
+
+    videoGSAP.addEventListener('loadedmetadata', () => {
+      videoGSAP.pause();
+      const dur = videoGSAP.duration;
+
+      // Clampear keyframes a duración real
+      KEYFRAMES.forEach(kf => { kf.time = Math.min(kf.time, dur); });
+
+      // ── Control del video con ScrollTrigger ────────────────────
+      // scrub: 1.2 → suavidad (equivale al LERP_FACTOR de la versión vanilla)
+      ScrollTrigger.create({
+        trigger: '#scrollTrack',
+        start:   'top top',
+        end:     'bottom bottom',
+        scrub:   1.2,
+        onUpdate(self) {
+          // self.progress = 0–1, igual que nuestro getScrollProgress()
+          videoGSAP.currentTime = getTargetTime(self.progress);
+        }
+      });
+
+      // ── Visibilidad de escenas con ScrollTrigger ────────────────
+      SCENES.forEach((scene) => {
+        const el = document.getElementById(scene.id);
+
+        ScrollTrigger.create({
+          trigger:    '#scrollTrack',
+          start:      () => `${scene.start * 100}% top`,
+          end:        () => `${scene.end   * 100}% top`,
+          onEnter:     () => el.classList.add('visible'),
+          onLeave:     () => el.classList.remove('visible'),
+          onEnterBack: () => el.classList.add('visible'),
+          onLeaveBack: () => el.classList.remove('visible'),
+        });
+      });
+    });
+
+    // Navbar y scroll hint (fuera del loadedmetadata porque no dependen del video)
+    ScrollTrigger.create({
+      start: 60,
+      onUpdate: self => navbar.classList.toggle('solid', self.scroller.scrollY > 60)
+    });
+  </script>
+  -->
+
 </body>
 </html>
